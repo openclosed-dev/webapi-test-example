@@ -6,7 +6,5 @@
 # Builds and runs the demo API server
 gradle :webapi:build
 java -jar webapi/build/libs/webapi.jar
-# Builds and runs the unit tests
-gradle :webapi-test:test
 ```
 
