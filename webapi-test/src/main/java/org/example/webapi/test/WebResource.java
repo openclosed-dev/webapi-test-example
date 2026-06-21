@@ -1,6 +1,5 @@
 package org.example.webapi.test;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import tools.jackson.databind.annotation.JsonTypeIdResolver;
@@ -12,9 +11,6 @@ import tools.jackson.databind.annotation.JsonTypeIdResolver;
     visible = false)
 @JsonTypeIdResolver(WebResourceTypeIdResolver.class)
 public interface WebResource {
-
-    @JsonProperty
-    String type();
 
     String id();
 }
