@@ -4,21 +4,21 @@ import java.util.List;
 
 public interface Response {
 
-    public record Single(WebResource data) implements Response {
+    public record One(WebResource data) implements Response {
     }
 
-    public record Multiple(List<WebResource> data) implements Response {
+    public record Many(List<WebResource> data) implements Response {
     }
 
     public record Errors(List<Error> errors) implements Response {
     }
 
     public static Response data(WebResource resource) {
-        return new Single(resource);
+        return new One(resource);
     }
 
     public static Response data(List<? extends WebResource> resources) {
-        return new Multiple(List.copyOf(resources));
+        return new Many(List.copyOf(resources));
     }
 
     public static Response error(Error error) {

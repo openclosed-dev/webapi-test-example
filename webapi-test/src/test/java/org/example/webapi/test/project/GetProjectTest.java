@@ -30,7 +30,7 @@ public class GetProjectTest {
             .exchange()
             .expectStatus().isOk()
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
-            .expectBody(Response.Single.class)
+            .expectBody(Response.One.class)
             .returnResult()
             .getResponseBody();
 

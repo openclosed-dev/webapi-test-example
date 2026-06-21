@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public interface Response {
 
-    public record Single(
+    public record One(
         @JsonProperty(required = true) WebResource data) implements Response {
     }
 
-    public record Multiple(
+    public record Many(
         @JsonProperty(required = true) List<WebResource> data) implements Response {
     }
 

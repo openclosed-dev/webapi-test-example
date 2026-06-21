@@ -23,13 +23,13 @@ public class FindProjectTest {
 
     @Test
     @Sql("add-project.sql")
-    public void findSingleProject() {
+    public void findOneProject() {
         var response = client.get().uri("/projects")
             .accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus().isOk()
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
-            .expectBody(Response.Multiple.class)
+            .expectBody(Response.Many.class)
             .returnResult()
             .getResponseBody();
 
@@ -43,13 +43,13 @@ public class FindProjectTest {
 
     @Test
     @Sql("add-projects.sql")
-    public void findMultipleProjects() {
+    public void findManyProjects() {
         var response = client.get().uri("/projects")
             .accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus().isOk()
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
-            .expectBody(Response.Multiple.class)
+            .expectBody(Response.Many.class)
             .returnResult()
             .getResponseBody();
 
@@ -76,7 +76,7 @@ public class FindProjectTest {
             .exchange()
             .expectStatus().isOk()
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
-            .expectBody(Response.Multiple.class)
+            .expectBody(Response.Many.class)
             .returnResult()
             .getResponseBody();
 
