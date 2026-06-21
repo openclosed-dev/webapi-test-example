@@ -1,0 +1,9 @@
+\encoding utf8
+
+CREATE TABLE project(
+  id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY(id)
+);

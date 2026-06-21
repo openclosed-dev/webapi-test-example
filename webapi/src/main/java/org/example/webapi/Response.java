@@ -1,0 +1,31 @@
+package org.example.webapi;
+
+import java.util.List;
+
+public interface Response {
+
+    public record Single(WebResource data) implements Response {
+    }
+
+    public record Multiple(List<WebResource> data) implements Response {
+    }
+
+    public record Errors(List<Error> errors) implements Response {
+    }
+
+    public static Response data(WebResource resource) {
+        return new Single(resource);
+    }
+
+    public static Response data(List<? extends WebResource> resources) {
+        return new Multiple(List.copyOf(resources));
+    }
+
+    public static Response error(Error error) {
+        return new Errors(List.of(error));
+    }
+
+    public static Response errors(List<Error> errors) {
+        return new Errors(List.copyOf(errors));
+    }
+}

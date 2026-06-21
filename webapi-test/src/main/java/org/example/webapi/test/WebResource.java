@@ -1,0 +1,20 @@
+package org.example.webapi.test;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import tools.jackson.databind.annotation.JsonTypeIdResolver;
+
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    property = "type",
+    visible = false)
+@JsonTypeIdResolver(WebResourceTypeIdResolver.class)
+public interface WebResource {
+
+    @JsonProperty
+    String type();
+
+    String id();
+}

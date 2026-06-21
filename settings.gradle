@@ -1,0 +1,4 @@
+rootProject.name = 'webapi-test-example'
+
+includeBuild('webapi')
+includeBuild('webapi-test')

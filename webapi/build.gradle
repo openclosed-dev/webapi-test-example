@@ -1,0 +1,28 @@
+plugins {
+  id 'java'
+  id 'org.springframework.boot' version '4.1.0'
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(25)
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+  runtimeOnly 'org.postgresql:postgresql'
+}
+
+springBoot {
+  mainClass = 'org.example.webapi.WebApplication'
+}
