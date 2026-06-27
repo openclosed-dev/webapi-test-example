@@ -6,11 +6,13 @@ import tools.jackson.databind.annotation.JsonTypeIdResolver;
 
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    include = JsonTypeInfo.As.PROPERTY,
     property = "type",
-    visible = false)
+    visible = true)
 @JsonTypeIdResolver(WebResourceTypeIdResolver.class)
 public interface WebResource {
+
+    String type();
 
     String id();
 }

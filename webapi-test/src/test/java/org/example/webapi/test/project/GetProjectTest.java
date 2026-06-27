@@ -55,7 +55,7 @@ public class GetProjectTest {
         assertThat(errors).hasSize(1);
 
         var error = errors.getFirst();
-        assertThat(error.status()).isEqualTo("404");
+        assertThat(error.code()).isEqualTo("101");
+        assertThat(error.status()).isEqualTo(HttpStatus.NOT_FOUND);
     }
 }
-

@@ -24,9 +24,4 @@ public class TestConfiguration {
                 .responseTimeout(Duration.ofMinutes(10))
                 .build();
     }
-
-    @Bean
-    public WebResourceTypeIdResolver webResourceTypeIdResolver() {
-        return new WebResourceTypeIdResolver();
-    }
 }

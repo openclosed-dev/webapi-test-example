@@ -26,9 +26,11 @@ public class ProjectController {
         return service.get(Integer.valueOf(id))
             .map(p -> ResponseEntity.ok(Response.data(p)))
             .orElseGet(() -> {
-                var error = new Error("404", String.format("Project not found. id: %s", id));
+                var error = Error.newError(
+                    "101", HttpStatus.NOT_FOUND,
+                    String.format("Project not found. id: %s", id));
                 return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
+                    .status(error.status())
                     .body(Response.error(error));
             });
     }

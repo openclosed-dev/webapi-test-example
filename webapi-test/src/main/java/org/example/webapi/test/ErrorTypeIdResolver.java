@@ -1,5 +1,7 @@
 package org.example.webapi.test;
 
+import org.example.webapi.test.Error.DefaultError;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 import tools.jackson.core.JacksonException;
@@ -7,7 +9,7 @@ import tools.jackson.databind.DatabindContext;
 import tools.jackson.databind.JavaType;
 import tools.jackson.databind.jsontype.impl.TypeIdResolverBase;
 
-public class WebResourceTypeIdResolver extends TypeIdResolverBase {
+public class ErrorTypeIdResolver extends TypeIdResolverBase {
 
     private JavaType superType;
 
@@ -17,14 +19,10 @@ public class WebResourceTypeIdResolver extends TypeIdResolverBase {
     }
 
     @Override
-    public JavaType typeFromId(DatabindContext context, String typeId) {
-        var subclass = switch(typeId) {
-            case Project.TYPE -> Project.class;
-            default -> null;
+    public JavaType typeFromId(DatabindContext context, String code) {
+        var subclass = switch(code) {
+            default -> DefaultError.class;
         };
-        if (subclass == null) {
-            return null;
-        }
         return context.constructSpecializedType(superType, subclass);
     }
 
