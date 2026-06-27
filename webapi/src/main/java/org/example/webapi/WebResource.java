@@ -12,5 +12,7 @@ import tools.jackson.databind.annotation.JsonTypeIdResolver;
 @JsonTypeIdResolver(WebResourceTypeIdResolver.class)
 public interface WebResource {
 
+    String type();
+
     String id();
 }

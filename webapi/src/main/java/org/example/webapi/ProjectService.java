@@ -21,4 +21,8 @@ public class ProjectService {
     public Optional<Project> get(int id) {
         return repo.get(id);
     }
+
+    public Project create(Project project) {
+        return repo.create(project);
+    }
 }

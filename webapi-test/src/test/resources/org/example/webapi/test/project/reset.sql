@@ -1,1 +1,1 @@
-TRUNCATE project;
+TRUNCATE project RESTART IDENTITY;

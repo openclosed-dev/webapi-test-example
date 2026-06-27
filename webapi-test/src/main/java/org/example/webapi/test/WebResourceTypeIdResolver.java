@@ -36,7 +36,11 @@ public class WebResourceTypeIdResolver extends TypeIdResolverBase {
     @Override
     public String idFromValueAndType(DatabindContext context, Object value, Class<?> suggestedType)
             throws JacksonException {
-        throw new UnsupportedOperationException("Unimplemented method 'idFromValueAndType'");
+        return switch (value) {
+            case Project _ -> Project.TYPE;
+            // null will be handled in caller site
+            default -> null;
+        };
     }
 
     @Override

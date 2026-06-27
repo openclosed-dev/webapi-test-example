@@ -9,4 +9,12 @@ public record Project(String type, String id, String name) implements WebResourc
             throw new IllegalArgumentException(type);
         }
     }
+
+    public Project(String id, String name) {
+        this(TYPE, id, name);
+    }
+
+    public Project(String name) {
+        this(null, name);
+    }
 }

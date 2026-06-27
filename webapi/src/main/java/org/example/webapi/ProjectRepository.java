@@ -40,10 +40,23 @@ public class ProjectRepository {
         }
     }
 
+    public Project create(Project project) {
+        var newProject = template.queryForObject(
+            """
+            INSERT INTO project(name)
+            VALUES(?)
+            RETURNING id, name
+            """,
+            ProjectRepository::map,
+            project.name()
+        );
+        return newProject;
+    }
+
     private static Project map(ResultSet rs, int rowNum) throws SQLException {
         return new Project(
-            rs.getString(1),
-            rs.getString(2)
+            rs.getString("id"),
+            rs.getString("name")
         );
     }
 }
