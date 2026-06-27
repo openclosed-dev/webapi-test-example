@@ -10,7 +10,6 @@
       "extensions": [
         "editorconfig.editorconfig",
         "streetsidesoftware.code-spell-checker",
-        "ms-azuretools.vscode-docker",
         "vscjava.vscode-java-pack"
       ]
     }
