@@ -1,7 +1,7 @@
 package org.example.webapi.test.project;
 
 import org.example.webapi.test.Project;
-import org.example.webapi.test.Response;
+import org.example.webapi.test.Document;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -30,7 +30,7 @@ public class GetProjectTest {
             .exchange()
             .expectStatus().isOk()
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
-            .expectBody(Response.One.class)
+            .expectBody(Document.One.class)
             .returnResult()
             .getResponseBody();
 
@@ -42,16 +42,16 @@ public class GetProjectTest {
 
     @Test
     public void getNonexistentProject() {
-        var response = client.get().uri("/projects/999")
+        var doc = client.get().uri("/projects/999")
             .accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus().isEqualTo(HttpStatus.NOT_FOUND)
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
-            .expectBody(Response.Errors.class)
+            .expectBody(Document.Errors.class)
             .returnResult()
             .getResponseBody();
 
-        var errors = response.errors();
+        var errors = doc.errors();
         assertThat(errors).hasSize(1);
 
         var error = errors.getFirst();

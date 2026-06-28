@@ -19,31 +19,31 @@ public class ProjectController {
     }
 
     @GetMapping("projects")
-    public ResponseEntity<Response> findProject() {
-        return ResponseEntity.ok(Response.data(service.find()));
+    public ResponseEntity<Document> findProject() {
+        return ResponseEntity.ok(Document.data(service.find()));
     }
 
     @GetMapping("projects/{id}")
-    public ResponseEntity<Response> getProject(
+    public ResponseEntity<Document> getProject(
         @PathVariable("id") String id) {
         return service.get(Integer.valueOf(id))
-            .map(p -> ResponseEntity.ok(Response.data(p)))
+            .map(p -> ResponseEntity.ok(Document.data(p)))
             .orElseGet(() -> {
                 var error = Error.newError(
                     "101", HttpStatus.NOT_FOUND,
                     String.format("Project not found. id: %s", id));
                 return ResponseEntity
                     .status(error.status())
-                    .body(Response.error(error));
+                    .body(Document.errors(error));
             });
     }
 
     @PostMapping("projects")
-    public ResponseEntity<Response> createProject(
-        @RequestBody Request.One body,
+    public ResponseEntity<Document> createProject(
+        @RequestBody Document.One doc,
         UriComponentsBuilder uriBuilder
     ) {
-        var data = body.data();
+        var data = doc.data();
         if (data instanceof Project p) {
             var created = service.create(p);
             var location = uriBuilder.path("/projects/{id}")
@@ -51,14 +51,14 @@ public class ProjectController {
                 .toUri();
             return ResponseEntity
                 .created(location)
-                .body(Response.data(created));
+                .body(Document.data(created));
         } else {
             var error = Error.newError(
                 "102", HttpStatus.BAD_REQUEST,
                 String.format("Invalid resource type: %s", data.type()));
             return ResponseEntity
                 .status(error.status())
-                .body(Response.error(error));
+                .body(Document.errors(error));
         }
     }
 }

@@ -1,7 +1,7 @@
 package org.example.webapi.test.project;
 
 import org.example.webapi.test.Project;
-import org.example.webapi.test.Response;
+import org.example.webapi.test.Document;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,16 +24,16 @@ public class FindProjectTest {
     @Test
     @Sql("add-project.sql")
     public void findOneProject() {
-        var response = client.get().uri("/projects")
+        var doc = client.get().uri("/projects")
             .accept(MediaType.APPLICATION_JSON)
             .exchange()
             .expectStatus().isOk()
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
-            .expectBody(Response.Many.class)
+            .expectBody(Document.Many.class)
             .returnResult()
             .getResponseBody();
 
-        var data = response.data();
+        var data = doc.data();
         assertThat(data).isNotNull().hasSize(1);
 
         var first = (Project) data.get(0);
@@ -49,7 +49,7 @@ public class FindProjectTest {
             .exchange()
             .expectStatus().isOk()
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
-            .expectBody(Response.Many.class)
+            .expectBody(Document.Many.class)
             .returnResult()
             .getResponseBody();
 
@@ -76,7 +76,7 @@ public class FindProjectTest {
             .exchange()
             .expectStatus().isOk()
             .expectHeader().contentType(MediaType.APPLICATION_JSON)
-            .expectBody(Response.Many.class)
+            .expectBody(Document.Many.class)
             .returnResult()
             .getResponseBody();
 
